@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('playergame', {
+  return sequelize.define('playerGame', {
     playerId: {
       type: DataTypes.INTEGER,
       allowNull: false,

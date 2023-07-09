@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Status', {
+    await queryInterface.createTable('status', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -25,7 +25,7 @@ module.exports = {
     });
 
     // Create Board table
-    await queryInterface.createTable('Board', {
+    await queryInterface.createTable('board', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -47,7 +47,7 @@ module.exports = {
     });
 
     // Create Game table
-    await queryInterface.createTable('Game', {
+    await queryInterface.createTable('game', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -57,7 +57,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Status',
+          model: 'status',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -75,7 +75,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Board',
+          model: 'board',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -97,7 +97,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('BoardElement', {
+    await queryInterface.createTable('boardElement', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -114,7 +114,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Board',
+          model: 'board',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -133,7 +133,7 @@ module.exports = {
     });
     
     // Create Player table
-    await queryInterface.createTable('Player', {
+    await queryInterface.createTable('player', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -159,12 +159,12 @@ module.exports = {
     });
     
     // Create PlayerGame table
-    await queryInterface.createTable('PlayerGame', {
+    await queryInterface.createTable('playerGame', {
       playerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Player',
+          model: 'player',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -174,7 +174,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Game',
+          model: 'game',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -202,22 +202,22 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
    
-    await queryInterface.dropTable('PlayerGame');
+    await queryInterface.dropTable('playerGame');
 
     // Drop BoardElement table
-    await queryInterface.dropTable('BoardElement');
+    await queryInterface.dropTable('boardElement');
   
     // Drop Game table
-    await queryInterface.dropTable('Game');
+    await queryInterface.dropTable('game');
   
     // Drop Board table
-    await queryInterface.dropTable('Board');
+    await queryInterface.dropTable('board');
   
     // Drop Status table
-    await queryInterface.dropTable('Status');
+    await queryInterface.dropTable('status');
   
     // Drop Player table
-    await queryInterface.dropTable('Player');
+    await queryInterface.dropTable('player');
   
 
   }
