@@ -1,15 +1,15 @@
 //importing modules
 const express = require("express");
-const db = require("../models");
+const db = require("../models/player");
 //Assigning db.users to User variable
- const User = db.player;
+ const player = db.player;
 
 //Function to check if username already exist in the database
 //this is to avoid having two users with the same username
  const savePlayer = async (req, res, next) => {
  //search the database to see if user exist
  try {
-   const playerName = await User.findOne({
+   const playerName = await player.findOne({
      where: {
        username: req.body.username,
      },
