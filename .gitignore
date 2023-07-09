@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore all files within node_modules
 node_modules/*
+
+# Ignore config file
+config/config.json

@@ -119,6 +119,30 @@ module.exports = {
       }
     });
     
+        // Create Player table
+        await queryInterface.createTable('Player', {
+          id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true
+          },
+          username: {
+            type: Sequelize.STRING,
+            allowNull: false
+          },
+          password: {
+            type: Sequelize.STRING,
+            allowNull: false
+          },
+          createdAt: {
+            type: Sequelize.DATE,
+            allowNull: false
+          },
+          updatedAt: {
+            type: Sequelize.DATE,
+            allowNull: false
+          }
+        });
+        
     // Create PlayerGame table
     await queryInterface.createTable('PlayerGame', {
       playerId: {
@@ -155,29 +179,7 @@ module.exports = {
       }
     });
     
-    // Create Player table
-    await queryInterface.createTable('Player', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-      },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false
-      }
-    });
+
 
   },
 
