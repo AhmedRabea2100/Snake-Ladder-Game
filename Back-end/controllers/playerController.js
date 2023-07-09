@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
-const db = require("../models");
+const db = require("../models").player;
 const jwt = require("jsonwebtoken");
 // const player = require("../models/player");
 
 // Assigning users to the variable User
-const player = db.player;
+const player = db;
 
 //signing a user up
 //hashing users password before its saved to the database with bcrypt
