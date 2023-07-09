@@ -1,6 +1,6 @@
 const game = require('../models').game;
 
-async function getData(req, res) {
+async function getRooms(req, res) {
   try {
     const data = await game.findAll({
       where: {
@@ -15,5 +15,5 @@ async function getData(req, res) {
 }
 
 module.exports = {
-  getData
+  getRooms
 };
