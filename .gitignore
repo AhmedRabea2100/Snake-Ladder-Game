@@ -5,6 +5,4 @@ node_modules/
 node_modules/*
 
 # Ignore config file
-config/config.json
-
 Back-end/config/config.json

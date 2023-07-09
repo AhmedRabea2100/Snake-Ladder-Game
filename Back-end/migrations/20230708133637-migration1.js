@@ -14,11 +14,13 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
 
@@ -34,11 +36,13 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
 
@@ -79,13 +83,20 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      lastMoveTime:{
+        type: Sequelize.TIME,
+        allowNull: true
       }
     });
+
     await queryInterface.createTable('BoardElement', {
       id: {
         type: Sequelize.INTEGER,
@@ -111,38 +122,42 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
     
-        // Create Player table
-        await queryInterface.createTable('Player', {
-          id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true
-          },
-          username: {
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          password: {
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-          },
-          updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-          }
-        });
-        
+    // Create Player table
+    await queryInterface.createTable('Player', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+      },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    });
+    
     // Create PlayerGame table
     await queryInterface.createTable('PlayerGame', {
       playerId: {
@@ -171,21 +186,21 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
     
 
-
   },
 
-  down: async (queryInterface, Sequelize) => {
 
-    await queryInterface.dropTable('Player');
+  down: async (queryInterface, Sequelize) => {
    
     await queryInterface.dropTable('PlayerGame');
 
@@ -202,7 +217,7 @@ module.exports = {
     await queryInterface.dropTable('Status');
   
     // Drop Player table
-    
+    await queryInterface.dropTable('Player');
   
 
   }
