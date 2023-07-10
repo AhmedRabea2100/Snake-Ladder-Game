@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     gameId: {
       type: DataTypes.INTEGER,
+      primaryKey:true,
       allowNull: false,
       references: {
         model: 'game',
