@@ -1,9 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const router = require('./routes/join_room')
-//const cors = require("cors");
-const router=require('./routes/router')
-const startgame = require('./controllers/startgame,js');
+const join_room_router = require('./routes/join_room')
+const startgame = require('./controllers/startgame.js');
 const move=require('./controllers/move.js');
 
 const app = express();
@@ -19,11 +17,10 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-app.use( router);
 app.get('/startgame/:gameId', startgame);
 app.get('/move/:gameId/:playerId', move);
 
-app.use('/api/', router)
+app.use('/api/', join_room_router)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
