@@ -1,18 +1,15 @@
 const express = require("express");
-<<<<<<< Updated upstream
 const cors = require("cors");
 const router = require('./routes/join_room')
-=======
 //const cors = require("cors");
 const router=require('./routes/router')
 const startgame = require('./controllers/startgame,js');
 const move=require('./controllers/move.js');
 
->>>>>>> Stashed changes
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "http://localhost:8081"
 };
 
 //app.use(cors(corsOptions));
