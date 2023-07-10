@@ -6,3 +6,4 @@ node_modules/*
 
 # Ignore config file
 Back-end/config/config.json
+Back-end/controllers/startgame
