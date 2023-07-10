@@ -7,17 +7,17 @@ const crypto = require("crypto");
 const player = db;
 
 // Generate a random integer ID
-const generateRandomId = () => {
-  const buffer = crypto.randomBytes(4);
-  return buffer.readUInt32BE(0);
-};
+// const generateRandomId = () => {
+//   const buffer = crypto.randomBytes(4);
+//   return buffer.readUInt32BE(0);
+// };
 
 // signing a user up
 // hashing users password before it's saved to the database with bcrypt
 const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const id = generateRandomId(); // Generate random integer ID
+    const id = db.id // Generate random integer ID
     const data = {
       id,
       username,
@@ -26,7 +26,6 @@ const signup = async (req, res) => {
 
     // saving the user
     const user = await player.create(data);
-
     // if user details are captured
     // generate token with the user's id and the secretKey in the env file
     // set cookie with the token generated
