@@ -1,0 +1,10 @@
+const express=require('express');
+const startgame=require('../controllers/startgame,js');
+const router = express.Router();
+
+
+
+
+
+
+module.exports = router
