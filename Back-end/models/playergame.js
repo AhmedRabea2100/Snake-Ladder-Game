@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('playergame', {
     playerId: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       primaryKey: true,
       references: {
@@ -12,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     gameId: {
       type: DataTypes.INTEGER,
-      primaryKey:true,
+      primaryKey: true,
       allowNull: false,
       primaryKey: true,
       references: {
