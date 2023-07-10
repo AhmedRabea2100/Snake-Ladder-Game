@@ -9,7 +9,7 @@ const player = db;
  const savePlayer = async (req, res, next) => {
  //search the database to see if user exist
 
- console.log(req.body)
+//  console.log(req.body)
  try {
    const playerName = await player.findOne({
      where: {
