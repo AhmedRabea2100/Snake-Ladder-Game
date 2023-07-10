@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'playergame',
+    tableName: 'playerGame',
     timestamps: true,
     indexes: [
       {

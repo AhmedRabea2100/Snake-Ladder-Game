@@ -1,18 +1,27 @@
 const game = require('../models').game;
+const playergame = require('../models').playergame;
 
 async function createGame(req, res) {
     try {
-      const { statusId, numberOfPlayers, currentPlayerId, boardId, lastMoveTime } = req.body;
+      const { statusId, numberOfPlayers, boardId, lastMoveTime,  playerId} = req.body;
   
-      const data = await game.create({
+      const gameData = await game.create({
         statusId,
         numberOfPlayers,
-        currentPlayerId,
+        currentPlayerId: playerId,
         boardId,
-        lastMoveTime,
+        lastMoveTime
       });
-  
-      res.json({ id: data.id });
+      
+      const createdGameId = gameData.id
+
+      const playerGameData = await playergame.create({
+        playerId,
+        gameId: createdGameId,
+        position: 1
+      });
+
+      res.json({ id:  createdGameId});
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
