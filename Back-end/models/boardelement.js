@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('boardElement', {
+  return sequelize.define('boardelement', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'boardElement',
+    tableName: 'boardelement',
     timestamps: true,
     indexes: [
       {

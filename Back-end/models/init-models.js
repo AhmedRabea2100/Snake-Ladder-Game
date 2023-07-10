@@ -17,13 +17,13 @@ function initModels(sequelize) {
   var status = _status(sequelize, DataTypes);
 
   boardelement.belongsTo(board, { as: "board", foreignKey: "boardId"});
-  board.hasMany(boardelement, { as: "boardelEments", foreignKey: "boardId"});
+  board.hasMany(boardelement, { as: "boardelements", foreignKey: "boardId"});
   game.belongsTo(board, { as: "board", foreignKey: "boardId"});
   board.hasMany(game, { as: "games", foreignKey: "boardId"});
   playergame.belongsTo(game, { as: "game", foreignKey: "gameId"});
-  game.hasMany(playergame, { as: "playerGame", foreignKey: "gameId"});
+  game.hasMany(playergame, { as: "playergames", foreignKey: "gameId"});
   playergame.belongsTo(player, { as: "player", foreignKey: "playerId"});
-  player.hasMany(playergame, { as: "playerGame", foreignKey: "playerId"});
+  player.hasMany(playergame, { as: "playergames", foreignKey: "playerId"});
   game.belongsTo(status, { as: "status", foreignKey: "statusId"});
   status.hasMany(game, { as: "games", foreignKey: "statusId"});
 

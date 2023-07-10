@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('playerGame', {
+  return sequelize.define('playergame', {
     playerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'player',
         key: 'id'
@@ -12,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     gameId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'game',
         key: 'id'
@@ -23,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'playerGame',
+    tableName: 'playergame',
     timestamps: true,
     indexes: [
       {

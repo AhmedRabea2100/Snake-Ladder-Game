@@ -1,5 +1,5 @@
 const game = require('../models').game;
-const playergame = require('../models').playergame;
+const playergame = require('../models/').playergame;
 
 async function createGame(req, res) {
     try {
@@ -12,7 +12,6 @@ async function createGame(req, res) {
         boardId,
         lastMoveTime
       });
-      
       const createdGameId = gameData.id
 
       const playerGameData = await playergame.create({

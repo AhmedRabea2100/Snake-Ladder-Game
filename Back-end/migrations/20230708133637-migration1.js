@@ -97,7 +97,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('boardElement', {
+    await queryInterface.createTable('boardelement', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -136,11 +136,13 @@ module.exports = {
     await queryInterface.createTable('player', {
       id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
       username: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       password: {
         type: Sequelize.STRING,
@@ -159,10 +161,11 @@ module.exports = {
     });
     
     // Create PlayerGame table
-    await queryInterface.createTable('playerGame', {
+    await queryInterface.createTable('playergame', {
       playerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'player',
           key: 'id'
@@ -173,6 +176,7 @@ module.exports = {
       gameId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'game',
           key: 'id'
@@ -182,7 +186,8 @@ module.exports = {
       },
       position: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -202,10 +207,10 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
    
-    await queryInterface.dropTable('playerGame');
+    await queryInterface.dropTable('playergame');
 
     // Drop BoardElement table
-    await queryInterface.dropTable('boardElement');
+    await queryInterface.dropTable('boardelement');
   
     // Drop Game table
     await queryInterface.dropTable('game');
