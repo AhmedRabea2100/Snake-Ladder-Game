@@ -5,7 +5,7 @@ const { MakeMoveController, JoinController } = require('../controllers/join.cont
 const router = express.Router()
 
 router
-    .route('/:game_id/join/')
+    .route('/join/')
     .post(JoinController)
 
 module.exports = router
