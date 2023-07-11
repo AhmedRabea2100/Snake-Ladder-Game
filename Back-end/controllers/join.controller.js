@@ -1,10 +1,12 @@
 const game = require('../models').game
 const playergame = require('../models').playergame
+const decrypt = require('../controllers/playerController').decryptToken;
 
 const JoinController = async (req, res) => {
     try {
         const gameId  = req.params.game_id
-        const playerId = req.body.player_id
+        const token = req.headers.authorization.slice(7);
+        const playerId = decrypt(token);
         const current_game = game.findOne({id: gameId})
         if (!current_game) {
             res.status(404).json({status: "failed", message: "game not found"})
