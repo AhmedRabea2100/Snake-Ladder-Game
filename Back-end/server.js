@@ -25,6 +25,15 @@ const io = socketIO(server);
 //app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
+
+app.use((req, res, next) => {
+  // Set headers to allow requests from any origin
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(express.json());
 app.use(cookieParser())
 
