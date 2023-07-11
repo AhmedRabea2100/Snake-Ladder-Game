@@ -12,13 +12,22 @@ const create_route = require('./routes/create_route');
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//   origin: "http://localhost:8081"
+// };
 
 //app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
+
+app.use((req, res, next) => {
+  // Set headers to allow requests from any origin
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
