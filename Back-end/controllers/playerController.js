@@ -17,6 +17,13 @@ const player = db;
 const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+      // Validate that required values are provided
+      if (!username || !password) {
+        return res.status(410).send("Missing username or password");
+      }
+    
+
     const id = db.id // Generate random integer ID
     const data = {
       id,
@@ -51,6 +58,12 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+      // Validate that required values are provided
+      if (!username || !password) {
+        return res.status(410).send("Missing username or password");
+      }
+    
 
     // find a user by their username
     const user = await player.findOne({
