@@ -1,18 +1,19 @@
 const game = require('../models').game
 const playergame = require('../models').playergame
+const decrypt = require('../controllers/playerController').decryptToken;
 
 const JoinController = async (req, res) => {
     try {
-        const gameId  = req.params.game_id
-        const playerId = req.body.player_id
+        const gameId  = req.body.gameId
+        const token = req.headers.authorization.slice(7);
+        const playerId = decrypt(token);
         const current_game = game.findOne({id: gameId})
         if (!current_game) {
             res.status(404).json({status: "failed", message: "game not found"})
-        } else if (current_game.statusId == 3) {
+        } 
+        else if (current_game.statusId == 3) {
             res.status(404).json({status: "failed", message: "game is completed"})
-        } else if (current_game.statusId == 2) {
-            // return data (rejoin)
-        }
+        } 
         const [player_game, created] = await playergame.findOrCreate({
             where: {
                 playerId: playerId,
@@ -54,7 +55,8 @@ const JoinController = async (req, res) => {
                 
             }
             res.status(200).json({status: "success", message: "joined the game successfully"})
-        } else {
+        }
+        else {
             res.status(403).json({status: "failed", message: "you are already in the game"})
         }
 

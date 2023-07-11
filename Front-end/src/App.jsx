@@ -1,20 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
-//import Auth from "./components/Auth"
+import "bootstrap/dist/js/bootstrap.min.js"
 import Auth from "./components/Auth"
+import Rooms from './components/Rooms.jsx'
 import {  Routes, Route } from "react-router-dom"
 
 
 function App() {
   return (
-    
       <Routes>
         <Route path="/Auth" element={<Auth />} />
-      </Routes>
-    
+        <Route path="/rooms" element={ <Rooms/> } />
+      </Routes> 
   )
 }
 

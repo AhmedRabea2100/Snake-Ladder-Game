@@ -1,16 +1,16 @@
 const game = require('../models').game;
 const playergame = require('../models/').playergame;
-
+const decrypt = require('../controllers/playerController').decryptToken;
 async function createGame(req, res) {
     try {
-      const { statusId, numberOfPlayers, boardId, lastMoveTime,  playerId} = req.body;
-  
+      const numberOfPlayers = req.body.numberOfPlayers;
+      const token = req.headers.authorization.slice(7);
+      const playerId = decrypt(token);
       const gameData = await game.create({
-        statusId,
+        statusId : 1,
         numberOfPlayers,
         currentPlayerId: playerId,
-        boardId,
-        lastMoveTime
+        boardId : 1,
       });
       const createdGameId = gameData.id
 
