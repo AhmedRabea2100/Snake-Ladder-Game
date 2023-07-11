@@ -17,13 +17,22 @@ const app = express();
 const server = http.createServer(app); 
 const io = socketIO(server);
 
+/* var corsOptions = {
+  origin: "http://localhost:8081"
+};  */
 
 // var corsOptions = {
 //   origin: "http://localhost:8081"
 // };
 
 //app.use(cors(corsOptions));
-
+app.use((req, res, next) => {
+  // Set headers to allow requests from any origin
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+}); 
 // parse requests of content-type - application/json
 
 app.use((req, res, next) => {

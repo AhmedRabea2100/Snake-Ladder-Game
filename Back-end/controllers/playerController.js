@@ -62,6 +62,13 @@ const player = db;
 const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+      // Validate that required values are provided
+      if (!username || !password) {
+        return res.send("Missing username or password")
+      }
+    
+
     const id = db.id // Generate random integer ID
     const data = {
       id,
@@ -75,17 +82,8 @@ const signup = async (req, res) => {
     // generate token with the user's id and the secretKey in the env file
     // set cookie with the token generated
     if (user) {
-      let token = jwt.sign({ id: user.id }, process.env.secretKey, {
-        expiresIn: 1 * 24 * 60 * 60 * 1000,
-      });
-
-      res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
-      // console.log("user", JSON.stringify(user, null, 2));
-      // console.log(token);
-      // send user's details
-      return res.status(201).send(user);
-    } else {
-      return res.status(409).send("Details are not correct");
+      
+      return res.send("Signup successful");
     }
   } catch (error) {
     console.log(error);
@@ -96,6 +94,12 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+      // Validate that required values are provided
+      if (!username || !password) {
+        return res.send("Missing username or password")
+      }
+    
 
     // find a user by their username
     const user = await player.findOne({
@@ -124,13 +128,12 @@ const login = async (req, res) => {
         // console.log("user", JSON.stringify(user, null, 2));
         // console.log(token);
         // send user data
-        // console.log(extractPlayerId);
-        return res.status(201).send(user);
+        return res.send("Login successful");
       } else {
-        return res.status(401).send("Authentication failed");
+        return res.send("Username and Password do not match");
       }
     } else {
-      return res.status(401).send("Authentication failed");
+      return res.send("Username does not exist");
     }
   } catch (error) {
     console.log(error);

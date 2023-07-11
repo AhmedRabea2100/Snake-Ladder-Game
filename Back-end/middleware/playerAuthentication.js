@@ -18,7 +18,7 @@ const player = db;
    });
    //if username exist in the database respond with a status of 409
    if (playerName) {
-     return res.json(409).send("username already taken");
+     return res.send("Username already taken");
    }
 
    next();

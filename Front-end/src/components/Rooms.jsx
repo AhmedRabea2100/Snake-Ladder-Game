@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import '../styles/rooms.css'
 
 export default class Rooms extends React.Component {
   state = {
