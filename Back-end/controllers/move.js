@@ -15,8 +15,8 @@ function rollDice(min = 1, max = 7) {
 
 const move = async (req, res) => {
     try {
-        const gameId  = req.params.gameId
-        const playerId = req.params.playerId
+        const gameId  = req.body.gameId
+        const playerId = req.body.playerId
         const current_game = await game.findByPk(gameId)
         const player_game = await playergame.findOne({
                 where: {

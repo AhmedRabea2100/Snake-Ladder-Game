@@ -32,7 +32,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 
 // Routing
-app.get('/move/:gameId/:playerId', move);
+app.post('/move/', move);
 app.use('/api/', join_room_router)
 app.use('/players',playerRoutes)
 app.use(rooms_route);

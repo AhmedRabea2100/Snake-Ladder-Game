@@ -4,7 +4,7 @@ const decrypt = require('../controllers/playerController').decryptToken;
 
 const JoinController = async (req, res) => {
     try {
-        const gameId  = req.params.game_id
+        const gameId  = req.body.gameId
         const token = req.headers.authorization.slice(7);
         const playerId = decrypt(token);
         const current_game = game.findOne({id: gameId})
