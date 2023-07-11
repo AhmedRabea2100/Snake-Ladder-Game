@@ -5,16 +5,16 @@ import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 //import Auth from "./components/Auth"
 import Auth from "./components/Auth"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import {  Routes, Route } from "react-router-dom"
 
 
 function App() {
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route path="/Auth" element={<Auth />} />
       </Routes>
-    </BrowserRouter>
+    
   )
 }
 

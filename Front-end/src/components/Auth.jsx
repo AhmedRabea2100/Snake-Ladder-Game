@@ -1,9 +1,51 @@
 
 
 import React, { useState } from "react"
+import axios from "axios";
 
-export default function Auth(props) {
+
+
+export default function (props) {
   let [authMode, setAuthMode] = useState("signin")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [register, setRegister] = useState();
+  const [msg, setMsg] = useState(false);
+
+  const handleSubmitReg = async (e) => {
+    e.preventDefault();
+     const data={
+        username,
+        password
+      };
+    try{
+    const response = await axios.post('http://localhost:8080/players/signup/', data);
+    const x = response.data;
+
+    alert(x)
+    
+    }
+    catch (error) {
+      alert("Please try again");
+      
+    }
+  };
+
+  const handleSubmitSignIn = async (e) => {
+
+    e.preventDefault();
+     const data={
+        username,
+        password
+      };
+    try{
+    const response = await axios.post('http://localhost:8080/players/login/',data);
+    const x = response.data;
+    alert(x)
+    }catch (error) {
+      alert("Please try again");
+    }
+  };
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
@@ -24,9 +66,11 @@ export default function Auth(props) {
             <div className="form-group mt-3">
               <label>Username</label>
               <input
-                type="username"
+                type="text"
                 className="form-control mt-1"
-                placeholder="Enter username"
+                placeholder="Enter Username"
+                value={username}
+              onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -35,14 +79,18 @@ export default function Auth(props) {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary" class="btnn">
+              <button type="submit" className="btn btn-primary" id="btnn" onClick={(e) => handleSubmitSignIn(e)}>
                 Submit
               </button>
             </div>
+           <p id="msg"></p>
           </div>
+          
         </form>
       </div>
     )
@@ -62,25 +110,36 @@ export default function Auth(props) {
           <div className="form-group mt-3">
             <label>Username</label>
             <input
-              type="name"
+              type="text"
               className="form-control mt-1"
-              placeholder="Enter Username"
+              placeholder="e.g Jane Doe"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+          
           <div className="form-group mt-3">
             <label>Password</label>
             <input
               type="password"
               className="form-control mt-1"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" class ="btnn">
+            <button type="submit" className="btn btn-primary" id="btnn" onClick={(e) => handleSubmitReg(e)} >
               Submit
             </button>
           </div>
+          {!register ? (
+          <p className="text-success"></p>
+        ) : (
+          <p className="text-danger">Username already exists</p>
+        )}
         </div>
+        
       </form>
     </div>
   )

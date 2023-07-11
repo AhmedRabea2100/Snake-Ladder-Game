@@ -32,6 +32,7 @@
   font-size: 24px;
   color: rgb(34, 34, 34);
   font-weight: 800;
+  font-style: italic;
 }
 
 label {
@@ -40,7 +41,17 @@ label {
   color: rgb(34, 34, 34);
 }
 
-.btnn{
+#btnn{
+  background-color: #27bb9a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+#btnn{
   background-color: #27bb9a;
   border: none;
   color: white;
