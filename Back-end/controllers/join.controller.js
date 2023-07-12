@@ -5,7 +5,7 @@ const decrypt = require('../controllers/playerController').decryptToken;
 const JoinController = async (req, res) => {
     try {
         const gameId  = req.body.gameId
-        const token = req.headers.authorization.slice(7);
+        const token = req.body.authorization;
         const playerId = decrypt(token);
         const current_game = game.findOne({id: gameId})
         if (!current_game) {
@@ -54,6 +54,7 @@ const JoinController = async (req, res) => {
                 console.log("game running");
                 
             }
+            
             res.status(200).json({status: "success", message: "joined the game successfully"})
         }
         else {
