@@ -4,7 +4,7 @@ const decrypt = require('../controllers/playerController').decryptToken;
 async function createGame(req, res) {
     try {
       const numberOfPlayers = req.body.numberOfPlayers;
-      const token = req.headers.authorization.slice(7);
+      const token = req.body.authorization;
       const playerId = decrypt(token);
       const gameData = await game.create({
         statusId : 1,

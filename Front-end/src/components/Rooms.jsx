@@ -4,7 +4,19 @@ import '../styles/rooms.css'
 
 export default class Rooms extends React.Component {
   state = {
-    rooms: []
+    rooms: [],
+    numberOfPlayers: 2
+  }
+
+  createRoom(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const data = axios.post('http://localhost:8080/create',
+    {
+      'numberOfPlayers': this.state.numberOfPlayers,
+      'authorization': token
+    })    
+    // window.location.href='/rooms'
   }
 
   componentDidMount() {
@@ -33,12 +45,12 @@ export default class Rooms extends React.Component {
                 </div>
                 <div class="modal-body">
                 <form id='create-room-form' class="form-outline" method="post" action='#'>
-                    <input type="number" placeholder="Enter Number" class="form-control" min="2" max="10" />
+                    <input type="number" placeholder="Enter Number" class="form-control" min="2" max="10" defaultValue="2" onChange={(e) => this.setState({ numberOfPlayers: e.target.value })}/>
                 </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-success" form="create-room-form">Create</button>
+                  <button type="button" class="btn btn-success" form="create-room-form" onClick={(e) => this.createRoom(e)}>Create</button>
                 </div>
               </div>
             </div>

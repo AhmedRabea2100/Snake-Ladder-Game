@@ -13,7 +13,7 @@ export default function (props) {
 
   const handleSubmitReg = async (e, props) => {
     e.preventDefault();
-     const data={
+     const data = {
         username,
         password
       };

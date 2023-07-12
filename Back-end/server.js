@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const dotenv = require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const db = require('./models')
@@ -34,14 +34,6 @@ app.use((req, res, next) => {
   next();
 }); 
 // parse requests of content-type - application/json
-
-app.use((req, res, next) => {
-  // Set headers to allow requests from any origin
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use(express.json());
 app.use(cookieParser())
