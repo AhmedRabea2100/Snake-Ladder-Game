@@ -1,7 +1,7 @@
 import '../styles/auth.css'
 import React, { useState } from "react"
 import axios from "axios";
-
+// const token = localStorage.getItem('token'); --> get token from localstorage
 
 
 export default function (props) {
@@ -11,7 +11,7 @@ export default function (props) {
   const [register, setRegister] = useState();
   const [msg, setMsg] = useState(false);
 
-  const handleSubmitReg = async (e) => {
+  const handleSubmitReg = async (e, props) => {
     e.preventDefault();
      const data={
         username,
@@ -20,7 +20,6 @@ export default function (props) {
     try{
     const response = await axios.post('http://localhost:8080/players/signup/', data);
     const x = response.data;
-
     alert(x)
     
     }
@@ -31,7 +30,6 @@ export default function (props) {
   };
 
   const handleSubmitSignIn = async (e) => {
-
     e.preventDefault();
      const data={
         username,
@@ -39,9 +37,17 @@ export default function (props) {
       };
     try{
     const response = await axios.post('http://localhost:8080/players/login/',data);
-    const x = response.data;
+    const x = response.data.message;
+    const token = response.data.token;
+    const statusCode = response.status;
     alert(x)
-    }catch (error) {
+    localStorage.setItem('token', token);
+
+    if (statusCode == 200) {      
+      window.location.href='/rooms'
+    }
+
+    } catch (error) {
       alert("Please try again");
     }
   };

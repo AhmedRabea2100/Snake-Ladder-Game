@@ -124,11 +124,15 @@ const login = async (req, res) => {
         // {id}=decoded
         // if password matches with the one in the database
         // go ahead and generate a cookie for the user
-        res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+        // res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: false });
         // console.log("user", JSON.stringify(user, null, 2));
         // console.log(token);
         // send user data
-        return res.send("Login successful");
+        // return res.send("Login successful");
+        return res.json({
+          message: "Login successful",
+          token: token
+        })
       } else {
         return res.send("Username and Password do not match");
       }
