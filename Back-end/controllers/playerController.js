@@ -58,14 +58,13 @@ const login = async (req, res) => {
         return res.send("Missing username or password")
       }
     
-
     // find a user by their username
     const user = await player.findOne({
       where: {
         username: username,
       },
     });
-    // console.log(user)
+
     // if username is found, compare password with bcrypt
     if (user) {
       const isSame = await bcrypt.compare(password, user.password);
@@ -77,9 +76,7 @@ const login = async (req, res) => {
           expiresIn: 1 * 24 * 60 * 60 * 1000,
         });
 
-        const ID=decryptToken(token);
-        console.log(ID);
-
+        const ID = decryptToken(token);
         return res.json({
           message: "Login successful",
           token: token,
@@ -96,11 +93,6 @@ const login = async (req, res) => {
     console.log(error);
   }
 };
-
-// const tokenExtraction={
-  
-// };
-
 
 module.exports = {
   signup,
