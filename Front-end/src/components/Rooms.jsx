@@ -12,7 +12,11 @@ export default class Rooms extends React.Component {
   socket = null; // Socket.IO instance
 
   componentDidMount() {
-    this.socket = io('http://localhost:8080'); // Establish socket connection
+    const token = localStorage.getItem('token');
+
+    this.socket = io('http://localhost:8080', {
+      query: { token }, // Pass the token as a query parameter
+    }); // Establish socket connection
 
     this.socket.on('roomCreated', (message) => {
       alert(message); // Display the received message as an alert
