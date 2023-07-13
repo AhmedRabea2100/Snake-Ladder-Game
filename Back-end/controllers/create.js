@@ -1,6 +1,7 @@
 const game = require('../models').game;
 const playergame = require('../models/').playergame;
 const decrypt = require('../controllers/playerController').decryptToken;
+// const io = require('../server').io;
 async function createGame(req, res) {
     try {
       const numberOfPlayers = req.body.numberOfPlayers;
@@ -19,6 +20,13 @@ async function createGame(req, res) {
         gameId: createdGameId,
         position: 1
       });
+      
+      global.io.emit('roomCreated',"hello from server");
+      // so.on('roomCreated', (data) => {
+      //   console.log('Message received:', data);
+      //   // Broadcast the received message to all connected clients
+      //   io.emit('roomCreated', data);
+      // });
 
       res.json({ id:  createdGameId});
     } catch (error) {
