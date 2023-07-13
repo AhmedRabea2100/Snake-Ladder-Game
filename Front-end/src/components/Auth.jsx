@@ -21,6 +21,7 @@ export default function (props) {
     const response = await axios.post('http://localhost:8080/players/signup/', data);
     const x = response.data;
     alert(x)
+    changeAuthMode();
     
     }
     catch (error) {

@@ -64,7 +64,6 @@ const login = async (req, res) => {
         username: username,
       },
     });
-
     // if username is found, compare password with bcrypt
     if (user) {
       const isSame = await bcrypt.compare(password, user.password);
