@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser')
 const db = require('./models')
 const http = require('http');
 const decrypt = require('./controllers/playerController').decryptToken;
-// const socketio = require('socket.io');
 
 // routes
 const join_room_router = require('./routes/join_room')

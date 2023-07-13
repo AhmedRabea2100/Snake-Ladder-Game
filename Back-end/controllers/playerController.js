@@ -2,40 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require("../models").player;
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-// const { extractPlayerId } = require('../middleware/extractPlayerId')
 
-// const extractPlayerId= function(token){
-//   try {
-//     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjg5MDY5OTA4LCJleHAiOjE3NzU0Njk5MDh9.J6YlDzZOEfkPo5jONp_taeb2MJPy_A8UM9pTg0j66qE";
-
-//     if (token) {
-//       const decodedToken = jwt.verify(token, process.env.secretKey);
-//       const playerId = decodedToken.id;
-//         console.log(playerId)
-//       player.findByPk(playerId)
-//         .then((foundPlayer) => {
-//           if (foundPlayer) {
-//             req.playerId = playerId;
-//             console.log(playerId);
-//             next();
-//           } else {
-//             // res.status(401).send('Invalid token');
-//             console.log("invalid token")
-//           }
-//         })
-//         .catch((error) => {
-//           console.error(error);
-//           // res.status(500).send('Internal server error');
-//         });
-//     } else {
-//       // res.status(401).send('Token not found');
-//       console.log("token not found")
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     // res.status(500).send('Internal server error');
-//   }
-// };
 
 function decryptToken(token) {
   try {
@@ -48,17 +15,8 @@ function decryptToken(token) {
 }
 
 
-// Assigning users to the variable User
 const player = db;
 
-// Generate a random integer ID
-// const generateRandomId = () => {
-//   const buffer = crypto.randomBytes(4);
-//   return buffer.readUInt32BE(0);
-// };
-
-// signing a user up
-// hashing users password before it's saved to the database with bcrypt
 const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -124,17 +82,12 @@ const login = async (req, res) => {
 
         const ID=decryptToken(token);
         console.log(ID);
-        // {id}=decoded
-        // if password matches with the one in the database
-        // go ahead and generate a cookie for the user
-        // res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: false });
-        // console.log("user", JSON.stringify(user, null, 2));
-        // console.log(token);
-        // send user data
-        // return res.send("Login successful");
+
         return res.json({
           message: "Login successful",
-          token: token
+          token: token,
+          id: ID,
+          username: username
         })
       } else {
         return res.send("Username and Password do not match");

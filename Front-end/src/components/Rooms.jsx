@@ -19,7 +19,7 @@ export default class Rooms extends React.Component {
       query: { token }, // Pass the token as a query parameter
     }); // Establish socket connection
 
-    this.socket.on('roomCreated', (message) => {
+    this.socket.on('message', (message) => {
       alert(message); // Display the received message as an alert
     });
 

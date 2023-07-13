@@ -18,7 +18,7 @@ async function createGame(req, res) {
 
       socket.join(createdGameId);
       console.log(`Socket ${socket.id} joined room ${createdGameId}`);
-
+      global.io.to(createdGameId).emit('message', `Welcom to Game ${createdGameId}`);
 
       const playerGameData = await playergame.create({
         playerId,
@@ -26,7 +26,6 @@ async function createGame(req, res) {
         position: 1
       });
       
-      global.io.emit('roomCreated',"hello from server");
 
       res.json({ id:  createdGameId});
     } catch (error) {
