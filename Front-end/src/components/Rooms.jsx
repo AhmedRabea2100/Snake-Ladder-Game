@@ -61,7 +61,7 @@ export default class Rooms extends React.Component {
     })
     console.log(data)
     if (data.data.status == 2){
-      alert(JSON.stringify(data.data.data))
+      await axios.post('http://localhost:8080/game',data.data.data)
       window.location.href='/game'
     }
     else{
@@ -85,7 +85,7 @@ export default class Rooms extends React.Component {
       <div className="cards">
         <div className="header">
           <h2>Available Rooms</h2>
-          <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" className="btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Create Room
           </button>
 
@@ -94,7 +94,7 @@ export default class Rooms extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">Create Room</h5>
-                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button"  className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
                   <form id='create-room-form' className="form-outline" method="post" action='#'>
@@ -111,7 +111,7 @@ export default class Rooms extends React.Component {
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-success" form="create-room-form" onClick={(e) => this.createRoom(e)}>Create</button>
+                  <button type="button" id="btnn2" className="btn btn-success"  form="create-room-form" onClick={(e) => this.createRoom(e)}>Create</button>
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default class Rooms extends React.Component {
       <h5 class="card-header">Room ID: {room.id}</h5>
       <div class="card-body">
         <p class="card-text">Number of Players: {room.numberOfPlayers}</p>
-        <button class="btn btn-primary" onClick={(e) => this.handleJoin(e, room)}>Join Room</button>
+        <button class="btn2"  onClick={(e) => this.handleJoin(e, room)}>Join Room</button>
       </div>
     </div>
   ))

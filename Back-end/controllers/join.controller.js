@@ -78,8 +78,7 @@ const JoinController = async (req, res) => {
             const boardID =await current_game.boardId;
             const image= await board.findByPk(boardID);
             res.json({"status":"2" , "data":exporter2(count,image,pend,username)});
-           // res.send({"status":"2" , "data":"here2"})
-           // res.send("here2")
+           
         }
         else {
             res.json({"status":"1" , "message":"you are already in the game"}) 
@@ -88,7 +87,6 @@ const JoinController = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        //res.send({"status":"1" ,"DATA": exporter2(numberOfPlayers,image,pend,username)})
         res.json({"message":"error"})
           
     }

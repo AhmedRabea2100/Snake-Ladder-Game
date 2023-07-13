@@ -4,6 +4,7 @@ body
   align-items: center;
   justify-content: center;
   width: 100%;
+  background-color: plum;
 }
 
 .cards .header
@@ -24,4 +25,36 @@ body
   margin-bottom: 12px;
   width: 600px;
   
+}
+#btnn {
+  background-color: #27bb9a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.btn2  {
+  background-color: #27bb9a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+.btn-close{
+  background-color: #27bb9a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
