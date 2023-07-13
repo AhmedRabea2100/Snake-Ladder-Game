@@ -1,6 +1,6 @@
 const game = require('../models').game;
 const playergame = require('../models').playergame;
-
+const board = require('../models').board;
 function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
@@ -12,7 +12,9 @@ function rollDice(min = 1, max = 7) {
     rand = rand + min;
     return rand;
 }
+function exporter(currentPlayerId,dice,new_position){
 
+}
 const move = async (req, res) => {
     try {
         const gameId  = req.body.gameId
@@ -25,7 +27,8 @@ const move = async (req, res) => {
                 }});
         
         last_position = player_game.position
-        new_position = last_position + rollDice()
+        dice=rollDice()
+        new_position = last_position + dice
         console.log(new_position)
         if (new_position < 100) { await
                 player_game.update({ position: new_position })
@@ -59,6 +62,10 @@ const move = async (req, res) => {
 
         const nextPlayerId =playerTurns[Currentturn];
         await current_game.update({ currentPlayerId: nextPlayerId })
+        currentID=current_game.currentPlayerId;
+        boardID =await current_game.boardId;
+        image= await board.findByPk(boardID);
+        exporter2(currentID,dice,new_position);
         
         res.status(200);
         res.json({last: last_position, new: new_position, moves:(new_position-last_position)});

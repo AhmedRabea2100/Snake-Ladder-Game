@@ -1,6 +1,10 @@
 const game = require('../models').game
 const playergame = require('../models').playergame
 const decrypt = require('../controllers/playerController').decryptToken;
+const board = require('../models').board;
+function exporter2(numberOfPlayers,bgpic){
+
+}
 
 const JoinController = async (req, res) => {
     try {
@@ -52,7 +56,9 @@ const JoinController = async (req, res) => {
                     }
                 });
                 console.log("game running");
-                
+                boardID =await current_game.boardId;
+                image= await board.findByPk(boardID);
+                exporter2(limit_num,image);
             }
             
             res.status(200).json({status: "success", message: "joined the game successfully"})
