@@ -83,7 +83,8 @@ const login = async (req, res) => {
         return res.json({
           message: "Login successful",
           token: token,
-          id: decryptToken(token)
+          id: ID,
+          username: username
         })
       } else {
         return res.send("Username and Password do not match");

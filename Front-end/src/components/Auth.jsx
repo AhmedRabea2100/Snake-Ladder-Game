@@ -41,10 +41,11 @@ export default function (props) {
     const token = response.data.token;
     const statusCode = response.status;
     const id = response.data.id;
+    const username = response.data.username;
     alert(x)
     localStorage.setItem('token', token);
     localStorage.setItem('id', id);
-    
+    localStorage.setItem('username', username);
     if (statusCode == 200) {      
       window.location.href='/rooms'
     }
