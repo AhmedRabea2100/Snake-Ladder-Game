@@ -1,10 +1,11 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const dotenv = require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const db = require('./models')
 const http = require('http');
-const socketIO = require('socket.io');
+const decrypt = require('./controllers/playerController').decryptToken;
+// const socketio = require('socket.io');
 
 // routes
 const join_room_router = require('./routes/join_room')
@@ -15,17 +16,16 @@ const create_route = require('./routes/create_route');
 
 const app = express();
 const server = http.createServer(app); 
-const io = socketIO(server);
-
-/* var corsOptions = {
-  origin: "http://localhost:8081"
-};  */
+const io = require("socket.io")(server, {
+  cors: { origin: "*" },
+});
+global.io = io
 
 // var corsOptions = {
 //   origin: "http://localhost:8081"
-// };
+// };  
+// app.use(cors(corsOptions));
 
-//app.use(cors(corsOptions));
 app.use((req, res, next) => {
   // Set headers to allow requests from any origin
   res.header('Access-Control-Allow-Origin', '*');
@@ -47,19 +47,21 @@ app.use('/api/', join_room_router)
 app.use('/players',playerRoutes)
 app.use(rooms_route);
 app.use(create_route);
-app.get('/', (req, res) =>{
-  res.json("RECIEVED");
-})
 
-// Socket
+const connectedSockets = {};
+global.connectedSockets = connectedSockets;
+
 io.on('connection', (socket) => {
-  console.log('A user connected');
+  console.log('New client connected');
 
+  const token = socket.request._query.token;
+  connectedSockets[decrypt(token)] = socket;
+  // Event handler for socket disconnection
   socket.on('disconnect', () => {
-    console.log('A user disconnected');
+    console.log('Client disconnected');
   });
-
 });
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
