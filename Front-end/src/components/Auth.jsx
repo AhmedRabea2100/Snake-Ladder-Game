@@ -1,7 +1,7 @@
 import '../styles/auth.css'
 import React, { useState } from "react"
 import axios from "axios";
-// const token = localStorage.getItem('token'); --> get token from localstorage
+
 
 
 export default function (props) {
@@ -40,9 +40,11 @@ export default function (props) {
     const x = response.data.message;
     const token = response.data.token;
     const statusCode = response.status;
+    const id = response.data.id;
     alert(x)
     localStorage.setItem('token', token);
-
+    localStorage.setItem('id', id);
+    
     if (statusCode == 200) {      
       window.location.href='/rooms'
     }
