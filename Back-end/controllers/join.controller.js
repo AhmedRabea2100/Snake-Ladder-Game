@@ -1,22 +1,32 @@
 const game = require('../models').game
 const playergame = require('../models').playergame
 const decrypt = require('../controllers/playerController').decryptToken;
+const player = require('../models').player;
 const board = require('../models').board;
-function exporter2(numberOfPlayers,bgpic){
+function exporter2(numberOfPlayers,bgpic,gamestatus,username){
+    const data = {
+        "numberOfPlayers": numberOfPlayers,
+        "bgpic": bgpic,
+        "gamestatus": gamestatus,
+        "username": username.username
+    }
+    return data
 
 }
 
 const JoinController = async (req, res) => {
     try {
-        const gameId  = req.body.gameId
+        const gameId  = req.body.roomId
+        console.log(gameId)
         const token = req.body.authorization;
         const playerId = decrypt(token);
         const current_game = game.findOne({id: gameId})
+        const username = await player.findOne({id: playerId})
         if (!current_game) {
-            res.status(404).json({status: "failed", message: "game not found"})
+            res.send("game not found") 
         } 
         else if (current_game.statusId == 3) {
-            res.status(404).json({status: "failed", message: "game is completed"})
+            res.send("game is completed")
         } 
         const [player_game, created] = await playergame.findOrCreate({
             where: {
@@ -56,23 +66,31 @@ const JoinController = async (req, res) => {
                     }
                 });
                 console.log("game running");
-                boardID =await current_game.boardId;
-                image= await board.findByPk(boardID);
-                exporter2(limit_num,image);
+                //res.send({"status":"2" , "data":"here"})
+                //res.send("here")
+                
+            const boardID =await current_game.boardId;
+            const image= await board.findByPk(boardID);
+                res.json({"status":"2" , "data":exporter2(count,image,run,username)});
             }
-            
-            res.status(200).json({status: "success", message: "joined the game successfully"})
+            const pend=1;
+
+            const boardID =await current_game.boardId;
+            const image= await board.findByPk(boardID);
+            res.json({"status":"2" , "data":exporter2(count,image,pend,username)});
+           // res.send({"status":"2" , "data":"here2"})
+           // res.send("here2")
         }
         else {
-            res.status(403).json({status: "failed", message: "you are already in the game"})
+            res.json({"status":"1" , "message":"you are already in the game"}) 
         }
 
 
     } catch (error) {
-        res.status(500).json({
-            status: "error",
-            message: error.message,
-        });
+        console.log(error)
+        //res.send({"status":"1" ,"DATA": exporter2(numberOfPlayers,image,pend,username)})
+        res.json({"message":"error"})
+          
     }
 }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/rooms.css'
 
 export default class Rooms extends React.Component {
+  
   state = {
     rooms: [],
     numberOfPlayers: 2
@@ -16,8 +17,29 @@ export default class Rooms extends React.Component {
       'numberOfPlayers': this.state.numberOfPlayers,
       'authorization': token
     })    
-    // window.location.href='/rooms'
+     window.location.href='/game'
   }
+  async handleJoin  (e,room) {
+    e.preventDefault();
+    console.log(room.id)
+    const token = localStorage.getItem('token');
+    const data = await axios.post('http://localhost:8080/api/join',
+    {
+      'roomId': room.id,
+      'authorization': token
+    })
+    console.log(data)
+    if (data.data.status == 2){
+      alert(JSON.stringify(data.data.data))
+      window.location.href='/game'
+    }
+    else{
+      const msg=JSON.stringify(data.data.message)
+      alert(msg)
+    }
+
+  }
+
 
   componentDidMount() {
     axios.get(`http://localhost:8080/rooms`)
@@ -59,20 +81,17 @@ export default class Rooms extends React.Component {
 
         </div>
       
-          {
-            this.state.rooms
-              .map(function(room)  {
-                return (
-                  <div class="card" key={room.id}>
-                  <h5 class="card-header">Room ID:{room.id}</h5>
-                  <div class="card-body">
-                      <p class="card-text">Number of Players: {room.numberOfPlayers}</p>
-                      <a href="#" class="btn btn-primary">Join Room</a>
-                  </div>
-                  </div>
-                )
-              })
-          }
+        {
+  this.state.rooms.map((room) => (
+    <div class="card" key={room.id}>
+      <h5 class="card-header">Room ID: {room.id}</h5>
+      <div class="card-body">
+        <p class="card-text">Number of Players: {room.numberOfPlayers}</p>
+        <button class="btn btn-primary" onClick={(e) => this.handleJoin(e, room)}>Join Room</button>
+      </div>
+    </div>
+  ))
+}
        </div>
     );
   }

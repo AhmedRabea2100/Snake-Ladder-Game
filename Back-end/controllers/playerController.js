@@ -107,6 +107,9 @@ const login = async (req, res) => {
         username: username,
       },
     });
+    if (!user) {
+      return res.send("Username does not exist. Please sign up.");
+    }
     // console.log(user)
     // if username is found, compare password with bcrypt
     if (user) {

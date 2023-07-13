@@ -13,6 +13,12 @@ function rollDice(min = 1, max = 7) {
     return rand;
 }
 function exporter(currentPlayerId,dice,new_position){
+    const data = {
+        "currentPlayerId": currentPlayerId,
+        "dice": dice,
+        "new_position": new_position
+    }
+    //send socket
 
 }
 const move = async (req, res) => {
@@ -65,7 +71,7 @@ const move = async (req, res) => {
         currentID=current_game.currentPlayerId;
         boardID =await current_game.boardId;
         image= await board.findByPk(boardID);
-        exporter2(currentID,dice,new_position);
+        exporter(currentID,dice,new_position);
         
         res.status(200);
         res.json({last: last_position, new: new_position, moves:(new_position-last_position)});
